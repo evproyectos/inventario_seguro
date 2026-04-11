@@ -1,8 +1,11 @@
 const express = require('express');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const { conectarDB } = require('./config/database');
 
 const app = express();
+
+conectarDB();
 
 app.use(helmet());
 app.use(express.json());
