@@ -1,9 +1,9 @@
 const { registrarEvento } = require('./auditLogger');
 
 const roles = {
-  SuperAdmin: ['CRUD_USUARIOS', 'CRUD_PRODUCTOS', 'CRUD_ROLES', 'VER_AUDIT', 'VER_REPORTES'],
-  Auditor:    ['VER_USUARIOS', 'VER_PRODUCTOS'],
-  Registrador:['CRUD_PRODUCTOS', 'VER_USUARIOS'],
+  SuperAdmin:  ['CRUD_USUARIOS', 'CRUD_PRODUCTOS', 'VER_PRODUCTOS', 'VER_USUARIOS', 'CRUD_ROLES', 'VER_AUDIT', 'VER_REPORTES'],
+  Auditor:     ['VER_USUARIOS', 'VER_PRODUCTOS'],
+  Registrador: ['CRUD_PRODUCTOS', 'VER_PRODUCTOS', 'VER_USUARIOS'],
 };
 
 const verificarPermiso = (permisoRequerido) => {

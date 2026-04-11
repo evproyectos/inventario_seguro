@@ -3,6 +3,8 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { conectarDB } = require('./config/database');
 const authRoutes = require('./routes/auth.routes');
+const productRoutes = require('./routes/products.routes');
+const userRoutes = require('./routes/users.routes');
 
 const app = express();
 
@@ -20,18 +22,19 @@ app.use(helmet({
       objectSrc:  ["'none'"],
     },
   },
-  frameguard:           { action: 'deny' },
-  noSniff:              true,
-  referrerPolicy:       { policy: 'strict-origin-when-cross-origin' },
-  hsts:                 { maxAge: 31536000, includeSubDomains: true },
+  frameguard:     { action: 'deny' },
+  noSniff:        true,
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+  hsts:           { maxAge: 31536000, includeSubDomains: true },
 }));
 
 app.use(express.json());
 app.use(cookieParser());
-
 app.set('trust proxy', 1);
 
-app.use('/api/auth', authRoutes);
+app.use('/api/auth',     authRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/users',    userRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Backend corriendo' });
