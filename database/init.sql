@@ -46,11 +46,12 @@ CREATE TABLE IF NOT EXISTS audit_log (
 );
 
 -- Seed: roles
-INSERT INTO roles (nombre, descripcion) VALUES
-    ('SuperAdmin', 'Acceso total al sistema'),
-    ('Auditor', 'Solo lectura en usuarios y productos'),
-    ('Registrador', 'CRUD de productos, lectura de usuarios')
-ON CONFLICT (nombre) DO NOTHING;
+INSERT INTO users (username, email, password_hash, role_id) VALUES (
+    'superadmin',
+    'superadmin@sistema.com',
+    '$2a$12$NMeqtkvaCOghpK1TTQGsT.L8T/3Igl3UpvKESTnlk/cl83GnIWjM.',
+    (SELECT id FROM roles WHERE nombre = 'SuperAdmin')
+) ON CONFLICT (username) DO NOTHING;
 
 -- Seed: usuario superadmin
 -- Contraseña: Admin1234! (bcrypt cost=12)
