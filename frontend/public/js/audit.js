@@ -1,4 +1,5 @@
 const user = requireAuth();
+const puedeEditar = user && (user.rol === 'SuperAdmin' || user.rol === 'Registrador');
 
 if (user?.rol !== 'SuperAdmin') {
   window.location.href = '/dashboard.html';

@@ -60,7 +60,11 @@ document.getElementById('btn-logout')?.addEventListener('click', async () => {
   window.location.href = '/login.html';
 });
 
-const user = getUser();
-if (user?.rol === 'SuperAdmin') {
-  document.getElementById('link-audit')?.classList.remove('hidden');
+function mostrarAuditLink() {
+  const u = getUser();
+  if (u?.rol === 'SuperAdmin') {
+    document.getElementById('link-audit')?.classList.remove('hidden');
+  }
 }
+
+mostrarAuditLink();
