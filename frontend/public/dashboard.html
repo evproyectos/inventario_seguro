@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Inventario Seguro</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <span class="nav-brand">Inventario Seguro</span>
+    <div class="nav-links">
+      <a href="products.html">Productos</a>
+      <a href="users.html">Usuarios</a>
+      <a href="audit.html" id="link-audit" class="hidden">Auditoría</a>
+      <button class="btn btn-outline" id="btn-logout">Cerrar sesión</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h2>Bienvenido, <span id="nombre-usuario"></span></h2>
+    <p>Rol: <span id="rol-usuario" class="badge"></span></p>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

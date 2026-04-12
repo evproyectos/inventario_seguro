@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditoría — Inventario Seguro</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <span class="nav-brand">Inventario Seguro</span>
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="products.html">Productos</a>
+      <a href="users.html">Usuarios</a>
+      <button class="btn btn-outline" id="btn-logout">Cerrar sesión</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h2>Log de auditoría</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Acción</th>
+          <th>Entidad</th>
+          <th>Detalle</th>
+          <th>IP</th>
+          <th>Resultado</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-audit"></tbody>
+    </table>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/audit.js"></script>
+</body>
+</html>

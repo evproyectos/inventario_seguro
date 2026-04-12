@@ -5,6 +5,7 @@ const { conectarDB } = require('./config/database');
 const authRoutes = require('./routes/auth.routes');
 const productRoutes = require('./routes/products.routes');
 const userRoutes = require('./routes/users.routes');
+const auditRoutes = require('./routes/audit.routes');
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.set('trust proxy', 1);
 app.use('/api/auth',     authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/users',    userRoutes);
+app.use('/api/audit', auditRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Backend corriendo' });

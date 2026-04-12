@@ -1,0 +1,66 @@
+const API = '/api';
+
+function getUser() {
+  const data = sessionStorage.getItem('user');
+  return data ? JSON.parse(data) : null;
+}
+
+function requireAuth() {
+  const user = getUser();
+  if (!user) {
+    window.location.href = '/login.html';
+    return null;
+  }
+  return user;
+}
+
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function showError(id, msg) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.remove('hidden');
+}
+
+function showSuccess(id, msg) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.remove('hidden');
+  setTimeout(() => el.classList.add('hidden'), 3000);
+}
+
+function hideAlert(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.add('hidden');
+}
+
+async function apiFetch(path, options = {}) {
+  const res = await fetch(API + path, {
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json', ...options.headers },
+    ...options,
+  });
+  const data = await res.json();
+  return { ok: res.ok, status: res.status, data };
+}
+
+document.getElementById('btn-logout')?.addEventListener('click', async () => {
+  await apiFetch('/auth/logout', { method: 'POST' });
+  sessionStorage.clear();
+  window.location.href = '/login.html';
+});
+
+const user = getUser();
+if (user?.rol === 'SuperAdmin') {
+  document.getElementById('link-audit')?.classList.remove('hidden');
+}

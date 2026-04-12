@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuarios — Inventario Seguro</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <span class="nav-brand">Inventario Seguro</span>
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="products.html">Productos</a>
+      <a href="audit.html" id="link-audit" class="hidden">Auditoría</a>
+      <button class="btn btn-outline" id="btn-logout">Cerrar sesión</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <h2>Usuarios</h2>
+      <button class="btn btn-primary" id="btn-nuevo" style="display:none">Nuevo usuario</button>
+    </div>
+
+    <div id="error-msg" class="alert alert-error hidden"></div>
+    <div id="success-msg" class="alert alert-success hidden"></div>
+
+    <div id="form-usuario" class="card hidden">
+      <h3 id="form-titulo">Nuevo usuario</h3>
+      <form id="usuario-form">
+        <input type="hidden" id="usuario-id">
+        <div class="form-grid">
+          <div class="form-group" id="grupo-username">
+            <label for="username">Username</label>
+            <input type="text" id="username" maxlength="50">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" maxlength="100">
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" minlength="8">
+          </div>
+          <div class="form-group">
+            <label for="role_id">Rol</label>
+            <select id="role_id">
+              <option value="1">SuperAdmin</option>
+              <option value="2">Auditor</option>
+              <option value="3">Registrador</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-outline" id="btn-cancelar">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Rol</th>
+          <th>Último login</th>
+          <th id="col-acciones" style="display:none">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-usuarios"></tbody>
+    </table>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/users.js"></script>
+</body>
+</html>
