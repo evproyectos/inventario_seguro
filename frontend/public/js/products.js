@@ -1,4 +1,4 @@
-//const user = requireAuth();
+const user = requireAuth();
 const puedeEditar = user && (user.rol === 'SuperAdmin' || user.rol === 'Registrador');
 
 if (puedeEditar) {
