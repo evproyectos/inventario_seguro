@@ -18,11 +18,13 @@ async function cargarUsuarios() {
     const ultimoLogin = u.ultimo_login
       ? new Date(u.ultimo_login).toLocaleString('es-CR')
       : 'Nunca';
+    const ip = u.ultimo_login_ip || 'N/A';
     tr.innerHTML = `
       <td>${escapeHtml(u.username)}</td>
       <td>${escapeHtml(u.email)}</td>
       <td><span class="badge">${escapeHtml(u.role?.nombre)}</span></td>
       <td>${escapeHtml(ultimoLogin)}</td>
+      <td>${escapeHtml(ip)}</td>
       ${puedeEditar ? `<td>
         <button class="btn btn-outline" onclick="editar(${u.id})">Editar</button>
         <button class="btn btn-danger" onclick="eliminar(${u.id})">Eliminar</button>

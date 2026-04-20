@@ -68,3 +68,25 @@ function mostrarAuditLink() {
 }
 
 mostrarAuditLink();
+
+const INACTIVIDAD_MS = 5 * 60 * 1000;
+let timerInactividad;
+
+function resetearTimer() {
+  clearTimeout(timerInactividad);
+  timerInactividad = setTimeout(async () => {
+    await apiFetch('/auth/logout', { method: 'POST' });
+    sessionStorage.clear();
+    alert('Sesión cerrada por inactividad.');
+    window.location.href = '/login.html';
+  }, INACTIVIDAD_MS);
+}
+
+const eventosActividad = ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'];
+eventosActividad.forEach(evento => {
+  document.addEventListener(evento, resetearTimer, { passive: true });
+});
+
+if (getUser()) {
+  resetearTimer();
+}

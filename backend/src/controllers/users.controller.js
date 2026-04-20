@@ -11,8 +11,30 @@ const listar = async (req, res) => {
       include: [{ model: Role, as: 'role', attributes: ['id', 'nombre'] }],
       order: [['created_at', 'DESC']],
     });
-    return res.json(usuarios);
+
+    const { QueryTypes } = require('sequelize');
+    const { sequelize } = require('../config/database');
+
+    const ipsUltimosLogins = await sequelize.query(`
+      SELECT DISTINCT ON (username) username, ip, created_at
+      FROM audit_log
+      WHERE accion = 'LOGIN_EXITOSO'
+      ORDER BY username, created_at DESC
+    `, { type: QueryTypes.SELECT });
+
+    const ipMap = {};
+    ipsUltimosLogins.forEach(row => {
+      ipMap[row.username] = row.ip;
+    });
+
+    const resultado = usuarios.map(u => ({
+      ...u.toJSON(),
+      ultimo_login_ip: ipMap[u.username] || null,
+    }));
+
+    return res.json(resultado);
   } catch (error) {
+    console.error(error.message);
     return res.status(500).json({ error: 'Error al obtener usuarios.' });
   }
 };
