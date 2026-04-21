@@ -4,11 +4,12 @@ const cookieParser = require('cookie-parser');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
 const { conectarDB } = require('./config/database');
+const { verificarToken } = require('./middleware/auth');
+const { verificarOrigen } = require('./middleware/csrf');
 const authRoutes = require('./routes/auth.routes');
 const productRoutes = require('./routes/products.routes');
 const userRoutes = require('./routes/users.routes');
 const auditRoutes = require('./routes/audit.routes');
-const { verificarOrigen } = require('./middleware/csrf');
 
 const app = express();
 
@@ -35,13 +36,10 @@ app.use(helmet({
 app.use(express.json());
 app.use(cookieParser());
 app.set('trust proxy', 1);
-
-app.use(express.json());
-app.use(cookieParser());
-app.set('trust proxy', 1);
 app.use(verificarOrigen);
 
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api/docs',     verificarToken, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.get('/api/docs-json', verificarToken, (req, res) => res.json(swaggerSpec));
 app.use('/api/auth',     authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/users',    userRoutes);
