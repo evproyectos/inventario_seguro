@@ -104,4 +104,13 @@ const logout = async (req, res) => {
   return res.json({ mensaje: 'Sesión cerrada correctamente.' });
 };
 
-module.exports = { login, logout };
+const me = async (req, res) => {
+  return res.json({
+    id: req.user.id,
+    username: req.user.username,
+    email: req.user.email,
+    rol: req.user.rol,
+  });
+};
+
+module.exports = { login, logout, me };

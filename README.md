@@ -27,10 +27,6 @@ seguridad HTTP requeridos en una sola línea.
 docker-compose up --build
 ```
 
-### Credenciales iniciales
-| Usuario | Contraseña | Rol |
-|---|---|---|
-| superadmin | Admin1234! | SuperAdmin |
 
 ### Documentación de la API
 `http://localhost:8080/api/docs`
