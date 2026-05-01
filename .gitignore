@@ -3,3 +3,4 @@ node_modules/
 *.log
 cookies.txt
 docs/swagger.json
+docs/Endpoints.md

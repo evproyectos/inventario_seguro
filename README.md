@@ -20,16 +20,30 @@ seguridad HTTP requeridos en una sola línea.
 
 ### Requisitos
 - Docker Desktop
-- ngrok (para exposición pública)
+- ngrok (integrado en Docker Compose)
 
 ### Levantar el proyecto
 ```bash
 docker-compose up --build
 ```
 
+### Ver la URL pública de ngrok
+Una vez levantado, abrí http://localhost:4040 en el navegador.
+La URL pública tipo `https://abc123.ngrok-free.app` aparece ahí.
 
 ### Documentación de la API
+Requiere estar autenticado primero.
 `http://localhost:8080/api/docs`
+
+## Credenciales iniciales
+
+| Usuario | Contraseña | Rol |
+|---|---|---|
+| superadmin | Admin1234! | SuperAdmin |
+| auditora | Admin1234! | Auditor |
+| auditor2 | Admin1234! | Auditor |
+| registrador1 | Admin1234! | Registrador |
+| registrador2 | Admin1234! | Registrador |
 
 ## URL pública (ngrok)
 > Actualizar antes de cada sesión de pentest
